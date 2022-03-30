@@ -1,0 +1,23 @@
+function carpetplot_fun(sub,sess)
+%addpath('~\Downloads\spm12\')
+figure
+for run=1:2
+file1 = ['sub-0',num2str(sub),'/ses-0',num2str(sess),'/func/sub-0',num2str(sub),'_ses-0',num2str(sess),'_run-0',num2str(run),'_WM_bold.nii'];
+outputname = ['sub-0',num2str(sub),'/sub-0',num2str(sub),'_ses-0',num2str(sess),'_carpet_plot.pdf'];
+
+I=spm_vol(file1);
+I2=spm_read_vols(I);
+
+for i=1:size(I2,4)
+    I3=I2(:,:,:,i);
+    mx(:,i)=I3(:);
+end
+[a b]=sort(mx(:,1));
+mxsort=mx(b,:);
+subplot(2,1,run)
+imagesc(mxsort(255000:end,:))
+colormap('gray')
+title(['Subject ',num2str(sub),' Session ',num2str(sess),' Run ',num2str(run)])
+end
+print(outputname, '-dpdf') 
+close all
