@@ -1,0 +1,7 @@
+subjects = [102:110]';
+sessnum = 2;
+for sub = 1:size(subjects,1)
+    for sess = 1:sessnum
+        carpetplot_fun(subjects(sub,:),sess)
+    end
+end
